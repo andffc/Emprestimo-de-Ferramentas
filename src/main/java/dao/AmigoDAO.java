@@ -1,8 +1,51 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import model.Amigo;
 
 public class AmigoDAO {
+
+    public ArrayList<Amigo> ListaAmigos = new ArrayList<>();
+
+    public ArrayList<Amigo> getMinhaLista() {
+
+        ListaAmigos.clear();
+
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos");
+            while (res.next()) {
+
+                int id = res.getInt("id_amigos");
+                String nome = res.getString("nome");
+                String telefone = res.getString("telefone");
+
+                Amigo objeto = new Amigo(id, nome, telefone);
+
+                ListaAmigos.add(objeto);
+            }
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Erro:" + ex);
+        }
+        return ListaAmigos;
+    }
+
+    public int maiorId() {
+        int maiorId = 0;
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT MAX(id_amigos) id FROM tb_amigos");
+            res.next();
+            maiorId = res.getInt("id");
+            stmt.close();
+        } catch (SQLException ex) {
+            System.out.println("Erro: " + ex);
+        }
+        return maiorId;
+    }
 
     public Connection getConexao() {
 
