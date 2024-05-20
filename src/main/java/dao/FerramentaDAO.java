@@ -1,6 +1,6 @@
 package dao;
 import java.util.ArrayList;
-import model.Ferramenta;
+import modelo.Ferramenta;
 import java.sql.*;
 
 public class FerramentaDAO {

@@ -2,7 +2,7 @@ package dao;
 
 import java.sql.*;
 import java.util.ArrayList;
-import model.Amigo;
+import modelo.Amigo;
 
 public class AmigoDAO {
 
