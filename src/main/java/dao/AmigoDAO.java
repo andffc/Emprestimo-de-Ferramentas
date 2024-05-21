@@ -11,7 +11,7 @@ public class AmigoDAO {
 
     public ArrayList<Amigo> ListaAmigos = new ArrayList<>();
     
-    private ConexaoDAO connect;
+    private RepeticaoDAO connect;
 
     public ArrayList<Amigo> getMinhaLista() {
 
