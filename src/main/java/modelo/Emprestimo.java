@@ -9,17 +9,20 @@ public class Emprestimo {
     private Date dataEmprestimo;
     private Date dataDevolucao;
     private boolean entregue;
-    private int id;
-     private EmprestimoDAO dao;
+    private int id, idAmg;
+    private EmprestimoDAO dao;
 
     public Emprestimo() {
+        this(null, null, false, 0, 0);
     }
 
-    public Emprestimo(Date dataEmprestimo, Date dataDevolucao, boolean entregue, int id) {
+    public Emprestimo(Date dataEmprestimo, Date dataDevolucao, boolean entregue, int id, int idAmg) {
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
         this.entregue = entregue;
         this.id = id;
+        this.idAmg = idAmg;
+
     }
 
     public Date getDataEmprestimo() {
@@ -53,7 +56,16 @@ public class Emprestimo {
     public void setId(int id) {
         this.id = id;
     }
-public ArrayList<Emprestimo> getListaEmprestimos() {
+
+    public int getIdAmg() {
+        return idAmg;
+    }
+
+    public void setIdAmg(int idAmg) {
+        this.idAmg = idAmg;
+    }
+
+    public ArrayList<Emprestimo> getListaEmprestimos() {
         return dao.getMinhaLista();
     }
 
