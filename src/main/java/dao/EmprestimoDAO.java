@@ -1,20 +1,25 @@
 package dao;
 
-import java.sql.*;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Emprestimo;
 
 public class EmprestimoDAO {
 
-
     public static ArrayList<Emprestimo> ListaEmprestimos = new ArrayList<>();
+    
+    private ConexaoDAO connect;
 
     public ArrayList<Emprestimo> getMinhaLista() {
 
         ListaEmprestimos.clear();
 
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = connect.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos");
             while (res.next()) {
 
@@ -39,7 +44,7 @@ public class EmprestimoDAO {
     public int maiorId() {
         int maiorId = 0;
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = connect.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT MAX(id_emprestimo) id FROM tb_emprestimos");
             res.next();
             maiorId = res.getInt("id");
@@ -49,35 +54,81 @@ public class EmprestimoDAO {
         }
         return maiorId;
     }
-
-    public Connection getConexao() {
-
-        Connection connection = null;
+    
+    public boolean inserirEmprestimoBD(Emprestimo objeto) {
+        String sql = "INSERT INTO tb_emprestimos(id_emprestimo,id_amigo,data_emprestimo, data_devolucao, entregue) VALUES(?,?,?,?,?)";
         try {
-            String driver = "com.mysql.cj.jdbc.Driver";
-            Class.forName(driver);
+            PreparedStatement stmt = connect.getConexao().prepareStatement(sql);
 
-            String server = "localhost";
-            String database = "Database";
-            String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
-            String user = "my_user";
-            String password = "my_user";
+            stmt.setInt(1, objeto.getId());
+            stmt.setInt(2, objeto.getIdAmg());
+            stmt.setDate(3, objeto.getDataDevolucao());
+            stmt.setDate(4, objeto.getDataEmprestimo());
+            stmt.setBoolean(5, objeto.isEntregue());
 
-            connection = DriverManager.getConnection(url, user, password);
+            stmt.execute();
+            stmt.close();
 
-            if (connection != null) {
-                System.out.println("Status: Conectado!");
-            } else {
-                System.out.println("Status: Não Conectado!");
-            }
-            return connection;
-
-        } catch (ClassNotFoundException e) {
-            System.out.println("O driver não foi encontrado.");
-            return null;
-        } catch (SQLException e) {
-            System.out.println("Não foi possível conectar...");
-            return null;
+            return true;
+        } catch (SQLException erro) {
+            System.out.println("Erro: " + erro);
+            throw new RuntimeException(erro);
         }
+    }
+
+    public boolean apagarEmprestimoBD(int id) {
+        try {
+            Statement stmt = connect.getConexao().createStatement();
+
+            stmt.executeUpdate("DELETE FROM tb_emprestimos WHERE id_emprestimo = " + id);
+
+            stmt.close();
+        } catch (SQLException erro) {
+            System.out.println("Erro: " + erro);
+        }
+        return true;
+    }
+
+    public boolean alterarEmprestimoBD(Emprestimo objeto) {
+        String sql = "UPDATE tb_emprestimos set id_amigo = ?, data_emprestimo = ?, data_devolucao = ?, entregue = ? WHERE id_emprestimo = ?";
+        try {
+            PreparedStatement stmt = connect.getConexao().prepareStatement(sql);
+
+            stmt.setInt(1, objeto.getIdAmg());           
+            stmt.setDate(2, objeto.getDataEmprestimo());
+            stmt.setDate(3, objeto.getDataDevolucao());
+            stmt.setBoolean(4, objeto.isEntregue());
+            stmt.setInt(5, objeto.getId());
+
+            stmt.execute();
+            stmt.close();
+
+            return true;
+
+        } catch (SQLException erro) {
+            System.out.println("Erro: " + erro);
+            throw new RuntimeException(erro);
+        }
+    }
+
+    public Emprestimo carregarEmprestimoBD(int id) {
+        Emprestimo objeto = new Emprestimo();
+        objeto.setId(id);
+        try {
+            Statement stmt = connect.getConexao().createStatement();
+
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimos WHERE id_emprestimo = " + id);
+            res.next();
+
+            objeto.setIdAmg(res.getInt("id_amigo"));
+            objeto.setDataEmprestimo(res.getDate("data_emprestimo"));
+            objeto.setDataDevolucao(res.getDate("data_devolucao"));
+            objeto.setEntregue(res.getBoolean("entregue"));
+
+            stmt.close();
+        } catch (SQLException erro) {
+            System.out.println("Erro:" + erro);
+        }
+        return objeto;
     }
 }
