@@ -1,4 +1,4 @@
-#Integrantes
+# Integrantes
 - Aline Steffen Rocha
 - André Leonardo da Silva
 - Isadora de Oliveira
