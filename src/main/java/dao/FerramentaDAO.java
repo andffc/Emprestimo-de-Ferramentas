@@ -10,9 +10,11 @@ import modelo.Ferramenta;
 public class FerramentaDAO {
 
     public ArrayList<Ferramenta> ListaFerramentas = new ArrayList<>();
-    
+
+    public ArrayList<Ferramenta> ListaFerramentasDisponiveis = new ArrayList<>();
+
     private ConexaoDAO connect;
-    
+
     public ArrayList<Ferramenta> getMinhaLista() {
 
         ListaFerramentas.clear();
@@ -127,5 +129,53 @@ public class FerramentaDAO {
             System.out.println("Erro:" + erro);
         }
         return objeto;
+    }
+
+    public ArrayList<Ferramenta> getFerramentasDisponiveis() {
+
+        ListaFerramentasDisponiveis.clear();
+
+        try {
+            Statement stmt = connect.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_ferramentas WHERE id_emprestimo is null");
+            while (res.next()) {
+
+                int id = res.getInt("id_ferramenta");
+                String nome = res.getString("nome");
+                String marca = res.getString("marca");
+                double custoAquisicao = Double.parseDouble(res.getString("custo_aquisicao"));
+                int idEmp = res.getInt("id_emprestimo");
+
+                Ferramenta objeto = new Ferramenta(nome, marca, custoAquisicao, id, idEmp);
+
+                ListaFerramentasDisponiveis.add(objeto);
+            }
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Erro:" + ex);
+        }
+        return ListaFerramentasDisponiveis;
+    }
+    
+    public boolean verificarPendencia(int id) {
+
+        try {
+            Statement stmt = connect.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("select id_emprestimo from tb_ferramentas;");
+            while (res.next()) {
+
+                int idEmp = res.getInt("id_emprestimo");
+
+                if (idEmp > 0 ) {
+                    return true;
+                }
+            }
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Erro:" + ex);
+        }
+        return false;
     }
 }
