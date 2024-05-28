@@ -2,7 +2,7 @@ package visao;
 
 import com.google.protobuf.TextFormat;
 import dao.AmigoDAO;
-import dao.ConexaoDAO;
+import dao.RepeticaoDAO;
 import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
 import java.sql.Date;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Emprestimo;
 import modelo.Ferramenta;
-import modelo.Util;
+import modelo.Data;
 
 public class FrmCadastroEmprestimo extends javax.swing.JFrame {
 
@@ -25,15 +25,15 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
     private EmprestimoDAO daoEmp = new EmprestimoDAO();
     private boolean countData = true;
     private Emprestimo objEmprestimo;
-    private ConexaoDAO connect;
+    private RepeticaoDAO connect;
     public ArrayList<String> FerSelect = new ArrayList<>();
 
     public FrmCadastroEmprestimo() {
         initComponents();
         preencherComboBox();
         this.objEmprestimo = new Emprestimo();
-        connect = new ConexaoDAO();
-        String data = Util.dataAtual().toString();
+        connect = new RepeticaoDAO();
+        String data = Data.dataAtual().toString();
         JTFDataEmp.setText(data);
         this.carregaTabelaFerramentas();
     }
@@ -354,7 +354,7 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
         try {
             String regex = "\\d{4}-\\d{2}-\\d{2}";
             int idAmg = 0;
-            Date dataEmprestimo = Util.dataAtual();
+            Date dataEmprestimo = Data.dataAtual();
             boolean entregue = false;
             Date dataDevolucao = null;
 
@@ -377,13 +377,13 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
             }
 
             if (this.JTFDataDev.getText().matches(regex)) {
-                dataDevolucao = Util.stringParaDateSQL(JTFDataDev.getText());
+                dataDevolucao = Data.stringParaDateSQL(JTFDataDev.getText());
                 if (dataDevolucao.before(dataEmprestimo)) {
                     dataDevolucao = null;
                     throw new Mensagens("Data de Devolução não pode ser antes da Data do Empréstimo");
 
                 } else if (dataDevolucao.after(dataEmprestimo)) {
-                    dataDevolucao = Util.stringParaDateSQL(JTFDataDev.getText());
+                    dataDevolucao = Data.stringParaDateSQL(JTFDataDev.getText());
                 } else {
                     dataDevolucao = null;
                     throw new Mensagens("Data de Devolução não pode ser igual a da Data do Empréstimo");

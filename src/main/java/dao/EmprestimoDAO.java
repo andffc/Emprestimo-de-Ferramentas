@@ -14,7 +14,7 @@ public class EmprestimoDAO {
 
     public ArrayList<Emprestimo> ListaEmprestimosAtivos = new ArrayList<>();
 
-    private ConexaoDAO connect;
+    private RepeticaoDAO connect;
 
     public ArrayList<Emprestimo> getMinhaLista() {
 

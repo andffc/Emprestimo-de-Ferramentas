@@ -1,6 +1,6 @@
 package visao;
 
-import dao.ConexaoDAO;
+import dao.RepeticaoDAO;
 import dao.EmprestimoDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import modelo.Emprestimo;
 
 public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
 
-    private ConexaoDAO connect;
+    private RepeticaoDAO connect;
     private EmprestimoDAO dao = new EmprestimoDAO();
     private Emprestimo objEmprestimo = new Emprestimo();
 

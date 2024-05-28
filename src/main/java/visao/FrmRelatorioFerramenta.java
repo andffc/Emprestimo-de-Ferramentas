@@ -1,6 +1,6 @@
 package visao;
 
-import dao.ConexaoDAO;
+import dao.RepeticaoDAO;
 import dao.FerramentaDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,7 +38,7 @@ public class FrmRelatorioFerramenta extends javax.swing.JFrame {
 
         try {
             String query = "SELECT SUM(custo_aquisicao) FROM tb_ferramentas";
-            PreparedStatement statement = ConexaoDAO.getConexao().prepareStatement(query);
+            PreparedStatement statement = RepeticaoDAO.getConexao().prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {

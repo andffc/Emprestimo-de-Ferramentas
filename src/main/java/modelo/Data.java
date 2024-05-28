@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-public class Util {
+public class Data {
 
     public static Date dataAtual() {
         LocalDate hoje = LocalDate.now();

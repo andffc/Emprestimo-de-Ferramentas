@@ -1,7 +1,7 @@
 package visao;
 
 import com.google.protobuf.TextFormat;
-import dao.ConexaoDAO;
+import dao.RepeticaoDAO;
 import dao.EmprestimoDAO;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -12,11 +12,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Emprestimo;
-import modelo.Util;
+import modelo.Data;
 
 public class FrmRelatorioAtivos extends javax.swing.JFrame {
 
-    private ConexaoDAO connect;
+    private RepeticaoDAO connect;
     private Emprestimo objEmprestimo = new Emprestimo();
     private EmprestimoDAO dao = new EmprestimoDAO();
 
@@ -264,17 +264,17 @@ public class FrmRelatorioAtivos extends javax.swing.JFrame {
 
             String regex = "\\d{4}-\\d{2}-\\d{2}";
             Date dataDevolucao = null;
-            Date dataEmprestimo = Util.stringParaDateSQL(JTFDataEmp.getText());
+            Date dataEmprestimo = Data.stringParaDateSQL(JTFDataEmp.getText());
             boolean Entregue = false;
 
             if (this.JTFDataDev.getText().matches(regex)) {
-                dataDevolucao = Util.stringParaDateSQL(JTFDataDev.getText());
+                dataDevolucao = Data.stringParaDateSQL(JTFDataDev.getText());
                 if (dataDevolucao.before(dataEmprestimo)) {
                     dataDevolucao = null;
                     throw new Mensagens("Data de Devolução não pode ser antes da Data do Empréstimo");
 
                 } else if (dataDevolucao.after(dataEmprestimo)) {
-                    dataDevolucao = Util.stringParaDateSQL(JTFDataDev.getText());
+                    dataDevolucao = Data.stringParaDateSQL(JTFDataDev.getText());
                 } else {
                     dataDevolucao = null;
                     throw new Mensagens("Data de Devolução não pode ser igual a da Data do Empréstimo");
