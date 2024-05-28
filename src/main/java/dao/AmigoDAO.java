@@ -10,7 +10,7 @@ import modelo.Amigo;
 public class AmigoDAO {
 
     public ArrayList<Amigo> ListaAmigos = new ArrayList<>();
-    
+
     private ConexaoDAO connect;
 
     public ArrayList<Amigo> getMinhaLista() {
@@ -121,5 +121,46 @@ public class AmigoDAO {
             System.out.println("Erro:" + erro);
         }
         return objeto;
+    }
+
+    public static int getIdPeloNome(String nome) {
+        int id = -1;
+
+        try {
+            String query = "SELECT id_amigo FROM tb_amigos WHERE nome = ?";
+            PreparedStatement statement = ConexaoDAO.getConexao().prepareStatement(query);
+            statement.setString(1, nome);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                id = resultSet.getInt("id_amigo");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro:" + ex);
+        }
+
+        return id;
+    }
+
+    public boolean verificarPendencia(int id) {
+
+        try {
+            Statement stmt = connect.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("select id_amigo, entregue from tb_emprestimos;");
+            while (res.next()) {
+
+                int idAmg = res.getInt("id_amigo");
+                boolean entregue = res.getBoolean("entregue");
+
+                if (idAmg == id && entregue == false) {
+                    return true;
+                }
+            }
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Erro:" + ex);
+        }
+        return false;
     }
 }
