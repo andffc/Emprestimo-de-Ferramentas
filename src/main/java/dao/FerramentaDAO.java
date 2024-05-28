@@ -11,7 +11,7 @@ public class FerramentaDAO {
 
     public ArrayList<Ferramenta> ListaFerramentas = new ArrayList<>();
     
-    private RepeticaoDAO connect;
+    private ConexaoDAO connect;
     
     public ArrayList<Ferramenta> getMinhaLista() {
 

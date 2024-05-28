@@ -12,7 +12,7 @@ public class EmprestimoDAO {
 
     public static ArrayList<Emprestimo> ListaEmprestimos = new ArrayList<>();
     
-    private RepeticaoDAO connect;
+    private ConexaoDAO connect;
 
     public ArrayList<Emprestimo> getMinhaLista() {
 
