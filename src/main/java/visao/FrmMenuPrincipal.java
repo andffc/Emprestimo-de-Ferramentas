@@ -23,13 +23,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Principal");
 
-        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setBorder(null);
-        jMenuBar1.setForeground(new java.awt.Color(255, 49, 49));
 
         JMEmprestimo.setBorder(null);
-        JMEmprestimo.setForeground(new java.awt.Color(0, 0, 0));
         JMEmprestimo.setText("Cadastros");
         JMEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -37,8 +35,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        CadastroAmigo.setBackground(new java.awt.Color(255, 255, 255));
-        CadastroAmigo.setForeground(new java.awt.Color(0, 0, 0));
         CadastroAmigo.setText("Amigo");
         CadastroAmigo.setBorder(null);
         CadastroAmigo.addActionListener(new java.awt.event.ActionListener() {
@@ -48,8 +44,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         JMEmprestimo.add(CadastroAmigo);
 
-        CadastroFerramenta.setBackground(new java.awt.Color(255, 255, 255));
-        CadastroFerramenta.setForeground(new java.awt.Color(0, 0, 0));
         CadastroFerramenta.setText("Ferramenta");
         CadastroFerramenta.setBorder(null);
         CadastroFerramenta.addActionListener(new java.awt.event.ActionListener() {
@@ -59,8 +53,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         JMEmprestimo.add(CadastroFerramenta);
 
-        jMenuItem1.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuItem1.setForeground(new java.awt.Color(0, 0, 0));
         jMenuItem1.setText("Empréstimo");
         jMenuItem1.setBorder(null);
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -72,11 +64,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(JMEmprestimo);
 
-        jMenu2.setForeground(new java.awt.Color(0, 0, 0));
         jMenu2.setText("Relatórios");
 
-        RelatorioAmigos.setBackground(new java.awt.Color(255, 255, 255));
-        RelatorioAmigos.setForeground(new java.awt.Color(0, 0, 0));
         RelatorioAmigos.setText("Amigos");
         RelatorioAmigos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,8 +74,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(RelatorioAmigos);
 
-        RelatorioFerramentas.setBackground(new java.awt.Color(255, 255, 255));
-        RelatorioFerramentas.setForeground(new java.awt.Color(0, 0, 0));
         RelatorioFerramentas.setText("Ferramentas");
         RelatorioFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,12 +82,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(RelatorioFerramentas);
 
-        jMenu1.setBackground(new java.awt.Color(255, 255, 255));
-        jMenu1.setForeground(new java.awt.Color(0, 0, 0));
         jMenu1.setText("Empréstimos");
 
-        jMenuItem3.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuItem3.setForeground(new java.awt.Color(0, 0, 0));
         jMenuItem3.setText("Todos");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,8 +92,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem2.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuItem2.setForeground(new java.awt.Color(0, 0, 0));
         jMenuItem2.setText("Ativos");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

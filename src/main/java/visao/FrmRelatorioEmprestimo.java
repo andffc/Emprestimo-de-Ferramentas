@@ -60,9 +60,9 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         JBApagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Relatorio de Emprestimos");
 
         JBCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        JBCancelar.setForeground(new java.awt.Color(0, 0, 0));
         JBCancelar.setText("Fechar");
         JBCancelar.setContentAreaFilled(false);
         JBCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,6 @@ public class FrmRelatorioEmprestimo extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable);
 
         JBApagar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        JBApagar.setForeground(new java.awt.Color(0, 0, 0));
         JBApagar.setText("Apagar");
         JBApagar.setBorder(null);
         JBApagar.setContentAreaFilled(false);
