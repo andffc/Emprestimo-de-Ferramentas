@@ -243,7 +243,7 @@ public class FrmRelatorioAtivos extends javax.swing.JFrame {
         try {
             int id = 0;
             if (this.jTable.getSelectedRow() == -1) {
-                throw new Mensagens(
+                throw new Mensagem(
                     "Primeiro Selecione um Empréstimo para ALTERAR");
             } else {
                 id = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 0).toString());
@@ -258,16 +258,16 @@ public class FrmRelatorioAtivos extends javax.swing.JFrame {
                 dataDevolucao = Data.stringParaDateSQL(JTFDataDev.getText());
                 if (dataDevolucao.before(dataEmprestimo)) {
                     dataDevolucao = null;
-                    throw new Mensagens("Data de Devolução não pode ser antes da Data do Empréstimo");
+                    throw new Mensagem("Data de Devolução não pode ser antes da Data do Empréstimo");
 
                 } else if (dataDevolucao.after(dataEmprestimo)) {
                     dataDevolucao = Data.stringParaDateSQL(JTFDataDev.getText());
                 } else {
                     dataDevolucao = null;
-                    throw new Mensagens("Data de Devolução não pode ser igual a da Data do Empréstimo");
+                    throw new Mensagem("Data de Devolução não pode ser igual a da Data do Empréstimo");
                 }
             } else {
-                throw new Mensagens("Data de Devolução deve conter o seguite formato:\nyyyy-MM-dd");
+                throw new Mensagem("Data de Devolução deve conter o seguite formato:\nyyyy-MM-dd");
             }
             if (JCBEntregue.isSelected()) {
                 int respostaUsuario = JOptionPane.showConfirmDialog(null, "Tem certeza que este Empréstimo foi finalizado?");
@@ -289,7 +289,7 @@ public class FrmRelatorioAtivos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Empréstimo Alterado com Sucesso!");
             }
             System.out.println(this.dao.getMinhaLista().toString());
-        } catch (Mensagens erro) {
+        } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
@@ -305,7 +305,7 @@ public class FrmRelatorioAtivos extends javax.swing.JFrame {
         try {
             int id = 0;
             if (this.jTable.getSelectedRow() == -1) {
-                throw new Mensagens(
+                throw new Mensagem(
                     "Primeiro Selecione um Empréstimo para APAGAR");
             } else {
                 id = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 0).toString());
@@ -325,7 +325,7 @@ public class FrmRelatorioAtivos extends javax.swing.JFrame {
                 }
             }
             System.out.println(this.dao.getMinhaLista().toString());
-        } catch (Mensagens erro) {
+        } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } finally {
             carregaTabelaEmprestimos();

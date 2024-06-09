@@ -193,7 +193,7 @@ public class FrmRelatorioAmigo extends javax.swing.JFrame {
             String nome, telefone = "";
 
             if (this.jTable.getSelectedRow() == -1) {
-                throw new Mensagens(
+                throw new Mensagem(
                     "Primeiro Selecione um Amigo para ALTERAR");
             } else {
                 id = Integer.parseInt(this.jTable.
@@ -202,14 +202,14 @@ public class FrmRelatorioAmigo extends javax.swing.JFrame {
             }
 
             if (this.JTFNome.getText().length() < 2) {
-                throw new Mensagens("Nome deve conter ao menos 2 caracteres.");
+                throw new Mensagem("Nome deve conter ao menos 2 caracteres.");
             } else {
                 nome = this.JTFNome.getText();
             }
             if (this.JTFTelefone.getText().length() == 11 && Long.parseLong(this.JTFTelefone.getText()) > 0) {
                 telefone = this.JTFTelefone.getText();
             } else {
-                throw new Mensagens("Telefone deve conter exatamente 11 digitos numéricos");
+                throw new Mensagem("Telefone deve conter exatamente 11 digitos numéricos");
             }
 
             if (this.objAmigo.alterarAmigo(id, nome, telefone)) {
@@ -218,7 +218,7 @@ public class FrmRelatorioAmigo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Amigo Alterado com Sucesso!");
             }
             System.out.println(this.dao.getMinhaLista().toString());
-        } catch (Mensagens erro) {
+        } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
@@ -233,7 +233,7 @@ public class FrmRelatorioAmigo extends javax.swing.JFrame {
             int id = 0;
 
             if (this.jTable.getSelectedRow() == -1) {
-                throw new Mensagens(
+                throw new Mensagem(
                     "Primeiro Selecione um Amigo para APAGAR");
             } else {
                 id = Integer.parseInt(this.jTable.getValueAt(this.jTable.getSelectedRow(), 0).toString());
@@ -256,7 +256,7 @@ public class FrmRelatorioAmigo extends javax.swing.JFrame {
                 }
             }
             System.out.println(this.dao.getMinhaLista().toString());
-        } catch (Mensagens erro) {
+        } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } finally {
             carregaTabelaAmigos();
