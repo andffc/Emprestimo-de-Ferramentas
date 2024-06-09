@@ -2,7 +2,7 @@ package visao;
 
 import com.google.protobuf.TextFormat;
 import dao.AmigoDAO;
-import dao.RepeticaoDAO;
+import dao.ConexaoDAO;
 import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
 import java.sql.Date;
@@ -25,14 +25,14 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
     private EmprestimoDAO daoEmp = new EmprestimoDAO();
     private boolean countData = true;
     private Emprestimo objEmprestimo;
-    private RepeticaoDAO connect;
+    private ConexaoDAO connect;
     public ArrayList<String> FerSelect = new ArrayList<>();
 
     public FrmCadastroEmprestimo() {
         initComponents();
         preencherComboBox();
         this.objEmprestimo = new Emprestimo();
-        connect = new RepeticaoDAO();
+        connect = new ConexaoDAO();
         String data = Data.dataAtual().toString();
         JTFDataEmp.setText(data);
         this.carregaTabelaFerramentas();

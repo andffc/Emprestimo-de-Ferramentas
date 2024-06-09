@@ -11,7 +11,7 @@ public class AmigoDAO {
 
     public ArrayList<Amigo> ListaAmigos = new ArrayList<>();
 
-    private RepeticaoDAO connect;
+    private ConexaoDAO connect;
 
     public ArrayList<Amigo> getMinhaLista() {
 
@@ -128,7 +128,7 @@ public class AmigoDAO {
 
         try {
             String query = "SELECT id_amigo FROM tb_amigos WHERE nome = ?";
-            PreparedStatement statement = RepeticaoDAO.getConexao().prepareStatement(query);
+            PreparedStatement statement = ConexaoDAO.getConexao().prepareStatement(query);
             statement.setString(1, nome);
             ResultSet resultSet = statement.executeQuery();
 

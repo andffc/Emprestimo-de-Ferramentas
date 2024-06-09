@@ -1,7 +1,7 @@
 package visao;
 
 import com.google.protobuf.TextFormat;
-import dao.RepeticaoDAO;
+import dao.ConexaoDAO;
 import dao.EmprestimoDAO;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ import modelo.Data;
 
 public class FrmRelatorioAtivos extends javax.swing.JFrame {
 
-    private RepeticaoDAO connect;
+    private ConexaoDAO connect;
     private Emprestimo objEmprestimo = new Emprestimo();
     private EmprestimoDAO dao = new EmprestimoDAO();
 
