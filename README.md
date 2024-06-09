@@ -9,8 +9,7 @@
 ```bash
 -RF01 - O sistema deve permitir que o usuário cadastre novas ferramentas, fornecendo informações como nome, marca e custo.
 -RF02 - O sistema deve registrar novos amigos no sistema, incluindo seus nomes, números de telefone e email.
--RF03 - O sistema deve possibilitar o registro de empréstimos, permitindo ao usuário
-especificar a ferramenta emprestada, o amigo para quem foi emprestada, a data de empréstimo e a data de devolução prevista.
+-RF03 - O sistema deve possibilitar o registro de empréstimos, permitindo ao usuário especificar a ferramenta emprestada, o amigo para quem foi emprestada, a data de empréstimo e a data de devolução prevista.
 -RF04 - O sistema deve alertar o usuário caso o amigo selecionado possua ferramentas não devolvidas.
 -RF05 - O sistema deve gerar relatórios contendo informações detalhadas sobre todas as ferramentas cadastradas, incluindo descrição, marca e custo individual, assim como o custo total das ferramentas.
 -RF06 - O sistema deve um relatório que exiba todos os empréstimos atualmente em andamento, mostrando a ferramenta emprestada, o amigo, a data de empréstimo e a data prevista de devolução.
