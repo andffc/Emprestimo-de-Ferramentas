@@ -8,14 +8,31 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Emprestimo;
 
+/**
+ * Classe EmprestimoDAO que fornece métodos para manipulação de dados de empréstimos no banco de dados.
+ */
 public class EmprestimoDAO {
 
+    /**
+     * Lista de todos os empréstimos.
+     */
     public static ArrayList<Emprestimo> ListaEmprestimos = new ArrayList<>();
 
+    /**
+     * Lista de empréstimos ativos.
+     */
     public ArrayList<Emprestimo> ListaEmprestimosAtivos = new ArrayList<>();
 
+    /**
+     * Objeto para conexão com o banco de dados.
+     */
     private ConexaoDAO connect;
 
+    /**
+     * Obtém a lista de todos os empréstimos.
+     *
+     * @return Lista de todos os empréstimos.
+     */
     public ArrayList<Emprestimo> getMinhaLista() {
 
         ListaEmprestimos.clear();
@@ -43,6 +60,11 @@ public class EmprestimoDAO {
         return ListaEmprestimos;
     }
 
+    /**
+     * Obtém o maior ID de empréstimo presente no banco de dados.
+     *
+     * @return Maior ID de empréstimo.
+     */
     public int maiorId() {
         int maiorId = 0;
         try {
@@ -57,6 +79,12 @@ public class EmprestimoDAO {
         return maiorId;
     }
 
+    /**
+     * Insere um novo empréstimo no banco de dados.
+     *
+     * @param objeto Empréstimo a ser inserido.
+     * @return True se a inserção for bem-sucedida, False caso contrário.
+     */
     public boolean inserirEmprestimoBD(Emprestimo objeto) {
         String sql = "INSERT INTO tb_emprestimos(id_emprestimo,id_amigo,data_emprestimo, data_devolucao, entregue) VALUES(?,?,?,?,?)";
         try {
@@ -78,6 +106,12 @@ public class EmprestimoDAO {
         }
     }
 
+    /**
+     * Apaga um empréstimo do banco de dados.
+     *
+     * @param id ID do empréstimo a ser apagado.
+     * @return True se a exclusão for bem-sucedida, False caso contrário.
+     */
     public boolean apagarEmprestimoBD(int id) {
         try {
             Statement stmt = connect.getConexao().createStatement();
@@ -91,6 +125,12 @@ public class EmprestimoDAO {
         return true;
     }
 
+    /**
+     * Altera os dados de um empréstimo no banco de dados.
+     *
+     * @param objeto Empréstimo com os novos dados.
+     * @return True se a alteração for bem-sucedida, False caso contrário.
+     */
     public boolean alterarEmprestimoBD(Emprestimo objeto) {
         String sql = "UPDATE tb_emprestimos set data_devolucao = ?, entregue = ? WHERE id_emprestimo = ?";
         try {
@@ -111,6 +151,12 @@ public class EmprestimoDAO {
         }
     }
 
+    /**
+     * Carrega um empréstimo do banco de dados com base no ID.
+     *
+     * @param id ID do empréstimo a ser carregado.
+     * @return Empréstimo carregado.
+     */
     public Emprestimo carregarEmprestimoBD(int id) {
         Emprestimo objeto = new Emprestimo();
         objeto.setId(id);
@@ -132,6 +178,11 @@ public class EmprestimoDAO {
         return objeto;
     }
 
+    /**
+     * Obtém a lista de empréstimos ativos (não entregues).
+     *
+     * @return Lista de empréstimos ativos.
+     */
     public ArrayList<Emprestimo> getEmprestimosAtivos() {
 
         ListaEmprestimosAtivos.clear();
@@ -158,7 +209,13 @@ public class EmprestimoDAO {
         }
         return ListaEmprestimosAtivos;
     }
-    
+
+    /**
+     * Verifica se um amigo tem empréstimos pendentes.
+     *
+     * @param id ID do amigo a ser verificado.
+     * @return True se houver pendências, False caso contrário.
+     */
     public boolean verificarPendencia(int id) {
 
         try {
@@ -166,9 +223,9 @@ public class EmprestimoDAO {
             ResultSet res = stmt.executeQuery("select entregue from tb_emprestimos;");
             while (res.next()) {
 
-                boolean  entregue = res.getBoolean("entregue");
+                boolean entregue = res.getBoolean("entregue");
 
-                if (entregue == false ) {
+                if (entregue == false) {
                     return true;
                 }
             }

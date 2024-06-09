@@ -1,7 +1,13 @@
 package visao;
 
+/**
+ * Classe responsável pela interface do menu principal.
+ */
 public class FrmMenuPrincipal extends javax.swing.JFrame {
 
+    /**
+     * Construtor da classe FrmMenuPrincipal.
+     */
     public FrmMenuPrincipal() {
         initComponents();
     }

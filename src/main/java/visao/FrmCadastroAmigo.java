@@ -8,6 +8,9 @@ public class FrmCadastroAmigo extends javax.swing.JFrame {
     private boolean countNome = true, countTelefone = true;
     private Amigo objAmigos;
 
+    /**
+     * Construtor que inicializa o formulário de cadastro de amigos.
+     */
     public FrmCadastroAmigo() {
         initComponents();
         this.objAmigos = new Amigo();

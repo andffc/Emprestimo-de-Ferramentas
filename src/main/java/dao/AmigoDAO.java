@@ -7,14 +7,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Amigo;
 
+/**
+ * Classe que representa um DAO para operações relacionadas a amigos.
+ */
 public class AmigoDAO {
 
+    /**
+     * Lista de amigos.
+     */
     public ArrayList<Amigo> ListaAmigos = new ArrayList<>();
 
+    /**
+     * Objeto de conexão com o banco de dados.
+     */
     private ConexaoDAO connect;
 
+    /**
+     * Obtém a lista de amigos.
+     *
+     * @return A lista de amigos.
+     */
     public ArrayList<Amigo> getMinhaLista() {
-
         ListaAmigos.clear();
 
         try {
@@ -38,6 +51,11 @@ public class AmigoDAO {
         return ListaAmigos;
     }
 
+    /**
+     * Obtém o maior ID de amigo.
+     *
+     * @return O maior ID de amigo.
+     */
     public int maiorId() {
         int maiorId = 0;
         try {
@@ -52,6 +70,12 @@ public class AmigoDAO {
         return maiorId;
     }
 
+    /**
+     * Insere um amigo no banco de dados.
+     *
+     * @param objeto O objeto amigo a ser inserido.
+     * @return Verdadeiro se a inserção foi bem-sucedida, falso caso contrário.
+     */
     public boolean inserirAmigoBD(Amigo objeto) {
         String sql = "INSERT INTO tb_amigos(id_amigo,nome,telefone) VALUES(?,?,?)";
         try {
@@ -71,6 +95,12 @@ public class AmigoDAO {
         }
     }
 
+    /**
+     * Apaga um amigo do banco de dados.
+     *
+     * @param id O ID do amigo a ser apagado.
+     * @return Verdadeiro se a exclusão foi bem-sucedida, falso caso contrário.
+     */
     public boolean apagarAmigoBD(int id) {
         try {
             Statement stmt = connect.getConexao().createStatement();
@@ -84,6 +114,12 @@ public class AmigoDAO {
         return true;
     }
 
+    /**
+     * Altera um amigo no banco de dados.
+     *
+     * @param objeto O objeto amigo com as alterações.
+     * @return Verdadeiro se a alteração foi bem-sucedida, falso caso contrário.
+     */
     public boolean alterarAmigoBD(Amigo objeto) {
         String sql = "UPDATE tb_amigos set nome = ?, telefone = ? WHERE id_amigo = ?";
         try {
@@ -104,6 +140,12 @@ public class AmigoDAO {
         }
     }
 
+    /**
+     * Carrega um amigo do banco de dados.
+     *
+     * @param id O ID do amigo a ser carregado.
+     * @return O objeto amigo carregado.
+     */
     public Amigo carregarAmigoBD(int id) {
         Amigo objeto = new Amigo();
         objeto.setId(id);
@@ -123,6 +165,12 @@ public class AmigoDAO {
         return objeto;
     }
 
+    /**
+     * Obtém o ID de um amigo pelo nome.
+     *
+     * @param nome O nome do amigo.
+     * @return O ID do amigo.
+     */
     public static int getIdPeloNome(String nome) {
         int id = -1;
 
@@ -142,6 +190,12 @@ public class AmigoDAO {
         return id;
     }
 
+    /**
+     * Verifica se há pendências para um amigo.
+     *
+     * @param id O ID do amigo.
+     * @return Verdadeiro se há pendências, falso caso contrário.
+     */
     public boolean verificarPendencia(int id) {
 
         try {

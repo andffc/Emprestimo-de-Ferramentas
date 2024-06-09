@@ -14,17 +14,26 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Emprestimo;
 import modelo.Data;
 
+/**
+ * Classe responsável pela exibição do relatório de empréstimos ativos.
+ */
 public class FrmRelatorioAtivos extends javax.swing.JFrame {
 
     private ConexaoDAO connect;
     private Emprestimo objEmprestimo = new Emprestimo();
     private EmprestimoDAO dao = new EmprestimoDAO();
 
+    /**
+ * Classe responsável pela exibição do relatório de empréstimos ativos.
+ */
     public FrmRelatorioAtivos() {
         initComponents();
         carregaTabelaEmprestimos();
     }
 
+    /**
+     * Método responsável por carregar a tabela de empréstimos ativos.
+     */
     public void carregaTabelaEmprestimos() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTable.getModel();
         modelo.setNumRows(0);
@@ -38,6 +47,11 @@ public class FrmRelatorioAtivos extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método para alterar o id de empréstimo da ferramenta.
+     * @param id O id do empréstimo.
+     * @return Verdadeiro se a operação for bem-sucedida, falso caso contrário.
+     */
     public boolean alterarIdEmpFerramenta(int id) {
         String sql = "UPDATE tb_ferramentas SET id_emprestimo = null WHERE id_emprestimo = ?";
         try {

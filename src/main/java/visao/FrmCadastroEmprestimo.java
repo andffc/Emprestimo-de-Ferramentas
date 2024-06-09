@@ -18,6 +18,9 @@ import modelo.Emprestimo;
 import modelo.Ferramenta;
 import modelo.Data;
 
+/**
+ * Classe responsável pela interface de cadastro de empréstimos.
+ */
 public class FrmCadastroEmprestimo extends javax.swing.JFrame {
 
     private AmigoDAO daoAmg = new AmigoDAO();
@@ -28,6 +31,9 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
     private ConexaoDAO connect;
     public ArrayList<String> FerSelect = new ArrayList<>();
 
+    /**
+     * Construtor da classe FrmCadastroEmprestimo.
+     */
     public FrmCadastroEmprestimo() {
         initComponents();
         preencherComboBox();
@@ -38,6 +44,9 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
         this.carregaTabelaFerramentas();
     }
 
+    /**
+     * Preenche o ComboBox de amigos com os nomes dos amigos cadastrados.
+     */
     private void preencherComboBox() {
         try {
             String query = "SELECT nome FROM tb_amigos";
@@ -55,6 +64,9 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Carrega a tabela de ferramentas disponíveis para empréstimo.
+     */
     public void carregaTabelaFerramentas() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTable.getModel();
         modelo.setNumRows(0);
@@ -65,6 +77,10 @@ public class FrmCadastroEmprestimo extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Altera o ID de empréstimo das ferramentas selecionadas no banco de dados.
+     * @return true se a operação for bem-sucedida, false caso contrário.
+     */
     public boolean alterarIdEmpFerramenta() {
         String sql = "UPDATE tb_ferramentas SET id_emprestimo = ? WHERE id_ferramenta = ?";
         try {

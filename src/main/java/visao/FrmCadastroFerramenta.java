@@ -3,17 +3,21 @@ package visao;
 import javax.swing.JOptionPane;
 import modelo.Ferramenta;
 
+/**
+ * Classe responsável pela interface de cadastro de ferramentas.
+ */
 public class FrmCadastroFerramenta extends javax.swing.JFrame {
 
     private boolean countNome = true, countMarca = true, countCusto = true;
     private Ferramenta objFerramenta;
 
+    /**
+     * Construtor da classe FrmCadastroFerramenta.
+     */
     public FrmCadastroFerramenta() {
         initComponents();
         this.objFerramenta = new Ferramenta();
-    }
-
-    @SuppressWarnings("unchecked")
+    }    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

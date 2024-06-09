@@ -5,16 +5,25 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Amigo;
 
+/**
+ * Classe responsável pela exibição do relatório de amigos.
+ */
 public class FrmRelatorioAmigo extends javax.swing.JFrame {
 
     private AmigoDAO dao = new AmigoDAO();
     private Amigo objAmigo = new Amigo();
 
+    /**
+     * Construtor da classe FrmRelatorioAmigo.
+     */
     public FrmRelatorioAmigo() {
         initComponents();
         carregaTabelaAmigos();
     }
 
+     /**
+     * Método responsável por carregar a tabela de amigos.
+     */
     public void carregaTabelaAmigos() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTable.getModel();
         modelo.setNumRows(0);
@@ -25,6 +34,7 @@ public class FrmRelatorioAmigo extends javax.swing.JFrame {
                 a.getTelefone(),});
         }
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -7,14 +7,31 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Ferramenta;
 
+/**
+ * Classe FerramentaDAO que fornece métodos para manipulação de dados de ferramentas no banco de dados.
+ */
 public class FerramentaDAO {
 
+    /**
+     * Lista de todas as ferramentas.
+     */
     public ArrayList<Ferramenta> ListaFerramentas = new ArrayList<>();
 
+    /**
+     * Lista de ferramentas disponíveis.
+     */
     public ArrayList<Ferramenta> ListaFerramentasDisponiveis = new ArrayList<>();
 
+    /**
+     * Objeto para conexão com o banco de dados.
+     */
     private ConexaoDAO connect;
 
+    /**
+     * Obtém a lista de todas as ferramentas.
+     *
+     * @return Lista de todas as ferramentas.
+     */
     public ArrayList<Ferramenta> getMinhaLista() {
 
         ListaFerramentas.clear();
@@ -42,6 +59,11 @@ public class FerramentaDAO {
         return ListaFerramentas;
     }
 
+    /**
+     * Obtém o maior ID de ferramenta presente no banco de dados.
+     *
+     * @return Maior ID de ferramenta.
+     */
     public int maiorId() {
         int maiorId = 0;
         try {
@@ -56,6 +78,12 @@ public class FerramentaDAO {
         return maiorId;
     }
 
+    /**
+     * Insere uma nova ferramenta no banco de dados.
+     *
+     * @param objeto Ferramenta a ser inserida.
+     * @return True se a inserção for bem-sucedida, False caso contrário.
+     */
     public boolean inserirFerramentaBD(Ferramenta objeto) {
         String sql = "INSERT INTO tb_ferramentas(id_ferramenta,nome,marca,custo_aquisicao) VALUES(?,?,?,?)";
         try {
@@ -76,6 +104,12 @@ public class FerramentaDAO {
         }
     }
 
+    /**
+     * Apaga uma ferramenta do banco de dados.
+     *
+     * @param id ID da ferramenta a ser apagada.
+     * @return True se a exclusão for bem-sucedida, False caso contrário.
+     */
     public boolean apagarFerramentaBD(int id) {
         try {
             Statement stmt = connect.getConexao().createStatement();
@@ -89,6 +123,12 @@ public class FerramentaDAO {
         return true;
     }
 
+    /**
+     * Altera os dados de uma ferramenta no banco de dados.
+     *
+     * @param objeto Ferramenta com os novos dados.
+     * @return True se a alteração for bem-sucedida, False caso contrário.
+     */
     public boolean alterarFerramentaBD(Ferramenta objeto) {
         String sql = "UPDATE tb_ferramentas set nome = ?, marca = ?, custo_aquisicao = ? WHERE id_ferramenta = ?";
         try {
@@ -110,6 +150,12 @@ public class FerramentaDAO {
         }
     }
 
+    /**
+     * Carrega uma ferramenta do banco de dados com base no ID.
+     *
+     * @param id ID da ferramenta a ser carregada.
+     * @return Ferramenta carregada.
+     */
     public Ferramenta carregarFerramenta(int id) {
         Ferramenta objeto = new Ferramenta();
         objeto.setId(id);
@@ -131,6 +177,11 @@ public class FerramentaDAO {
         return objeto;
     }
 
+    /**
+     * Obtém a lista de ferramentas disponíveis (não emprestadas).
+     *
+     * @return Lista de ferramentas disponíveis.
+     */
     public ArrayList<Ferramenta> getFerramentasDisponiveis() {
 
         ListaFerramentasDisponiveis.clear();
@@ -157,7 +208,13 @@ public class FerramentaDAO {
         }
         return ListaFerramentasDisponiveis;
     }
-    
+
+    /**
+     * Verifica se uma ferramenta está pendente de empréstimo.
+     *
+     * @param id ID da ferramenta a ser verificada.
+     * @return True se houver pendências, False caso contrário.
+     */
     public boolean verificarPendencia(int id) {
 
         try {
@@ -167,7 +224,7 @@ public class FerramentaDAO {
 
                 int idEmp = res.getInt("id_emprestimo");
 
-                if (idEmp > 0 ) {
+                if (idEmp > 0) {
                     return true;
                 }
             }

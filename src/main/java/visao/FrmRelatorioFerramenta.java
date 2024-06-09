@@ -9,17 +9,26 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ferramenta;
 
+/**
+ * Classe responsável pela exibição do relatório de ferramentas.
+ */
 public class FrmRelatorioFerramenta extends javax.swing.JFrame {
 
     private Ferramenta objFerramenta = new Ferramenta();
     private FerramentaDAO dao = new FerramentaDAO();
 
+    /**
+     * Construtor da classe FrmRelatorioFerramenta.
+     */
     public FrmRelatorioFerramenta() {
         initComponents();
         carregaTabelaFerramentas();
         JTFValorTotal.setText("R$" + valorTotal());
     }
 
+    /**
+     * Método responsável por carregar a tabela de ferramentas.
+     */
     public void carregaTabelaFerramentas() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTable.getModel();
         modelo.setNumRows(0);
@@ -33,6 +42,9 @@ public class FrmRelatorioFerramenta extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método responsável por carregar a tabela de ferramentas.
+     */
     public String valorTotal() {
         double soma = 0;
 

@@ -4,10 +4,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Classe responsável pela conexão com o banco de dados.
+ */
 public class ConexaoDAO {
 
+    /**
+     * Objeto de conexão com o banco de dados.
+     */
     private static Connection connection = null;
 
+    /**
+     * Obtém a conexão com o banco de dados.
+     *
+     * @return A conexão com o banco de dados.
+     */
     public static Connection getConexao() {
 
         if (connection == null) {
